@@ -1,0 +1,31 @@
+[win]
+
+
+[win:vars]
+ansible_user: 
+ansible_password: 
+ansible_connection: winrm
+ansible_winrm_transport: ntlm
+ansible_winrm_server_cert_validation: ignore
+
+[linux:children]
+deb
+rpm
+
+[deb]
+
+
+[deb:vars]
+ansible_user: 
+ansible_password: 
+
+[rpm]
+
+
+[rpm:vars]
+ansible_user: 
+ansible_password:
+
+[linux:vars]
+ansible_user=
+ansible_password=
