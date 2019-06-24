@@ -6,6 +6,17 @@
 # Usage: ./distribute_keys.sh <Inventory.txt>
 #
 
+####DEV
+
+echo ""
+read -p "Would you like to create a new ssh key to distribute? [y/n]" r
+if [ r == y ]; then
+    echo "Creating new key..."
+elif [ r == n ]; then
+    read -p "What is the location of the key you would like to distribute?" KEY
+
+###DEV
+
 echo ""
 echo "Please provide the absolute path to the inventory file you would like to copy ssh keys to."
 echo "NOTE: This will only work for Linux hosts."
@@ -20,6 +31,7 @@ echo ""
 KEY=~/.ssh/id_rsa
 if [[ -f $KEY ]]; then
     echo "An ssh key already exists for the current user on this host."
+    echo ""
     echo "Now beginning ssh key copy to remote hosts."
     echo ""
 else
