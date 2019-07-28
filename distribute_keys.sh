@@ -20,16 +20,16 @@ if [ $r == y ]; then
     KEY=~/.ssh/$name.pub
 elif [ $r == n ]; then
     echo ""
-    read -p "What is the absolute path to the key you would like to distribute? " KEY
+    read -p "What is the absolute path to the public key you would like to distribute? " KEY
 fi
 
 echo ""
-echo "Please provide the username of the service account that will distribute the keys."
+echo "Please provide the username of the service account that will distribute the public keys."
 echo ""
 read -p "Privledged user: " user
 echo ""
 
 for ip in $(cat $inventory | grep -o '^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'); do
-        echo "Copying ssh key to $ip..."
+        echo "~~~~~ Copying ssh key to $ip... ~~~~~"
         ssh-copy-id -i $KEY $user@$ip
 done
