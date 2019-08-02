@@ -1,0 +1,3 @@
+---
+- import_playbook: linux_FIM.yml
+- import_playbook: windows_FIM.yml
