@@ -1,0 +1,12 @@
+---
+- hosts: windows
+  tasks:
+  - Create a file.
+    win_command: echo malicious_code_example> C:\malicious.exe
+     creates: C:\malicious.exe
+  - Modify file.
+    win_command: echo modification_to_code>> C:\malicious.exe 2> C:\modify_proof.log
+     creates: C:\modify_proof.log
+  - Delete file.
+    win_command: del C:\malicious.exe
+  - win_command: del C:\modify_proof.log
