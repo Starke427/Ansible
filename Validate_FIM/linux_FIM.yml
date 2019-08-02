@@ -6,8 +6,8 @@
     command: echo "malicious_code_example" > /etc/malicious.conf
       creates: /etc/malicious.conf
   - name: Modify file.
-    command: echo "modification_to_example" >> /etc/malicious.conf | /tmp/malicious.conf
-      creates: /tmp/malicious.conf
+    command: echo "modification_to_example" >> /etc/malicious.conf | /tmp/modify_proof.log
+      creates: /tmp/modify_proof.log
   - name: Delete file.
     command: rm -f /etc/malicious.conf
-  - command: rm -f /tmp/malicious.conf
+  - command: rm -f /tmp/modify_proof.log
