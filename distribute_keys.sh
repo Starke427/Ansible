@@ -29,7 +29,19 @@ echo ""
 read -p "Privledged user: " user
 echo ""
 
-for ip in $(cat $inventory | grep -o '^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'); do
+echo ""
+read -p "Does the service account have the same password across the whole inventory? [y/n] " re
+if [ $re == y ]; then
+    echo ""
+    read -p "What is the shared password? " PASS
+    for ip in $(cat $inventory | grep -o '^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'); do
+        echo "~~~~~ Copying ssh key to $ip... ~~~~~"
+        echo "$PASS" | ssh-pass ssh-copy-id -i $KEY $user@$ip
+    done
+elif [ $re == n ]; then
+    echo ""
+    for ip in $(cat $inventory | grep -o '^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'); do
         echo "~~~~~ Copying ssh key to $ip... ~~~~~"
         ssh-copy-id -i $KEY $user@$ip
-done
+    done
+fi
