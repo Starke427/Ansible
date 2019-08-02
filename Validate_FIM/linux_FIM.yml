@@ -1,0 +1,13 @@
+---
+- hosts: linux
+  become: yes
+  tasks:
+  - name: Create a file.
+    command: echo "malicious_code_example" > /etc/malicious.conf
+      creates: /etc/malicious.conf
+  - name: Modify file.
+    command: echo "modification_to_example" >> /etc/malicious.conf | /tmp/malicious.conf
+      creates: /tmp/malicious.conf
+  - name: Delete file.
+    command: rm -f /etc/malicious.conf
+  - command: rm -f /tmp/malicious.conf
